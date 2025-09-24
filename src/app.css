@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-*: initial;
+	--color-background: #202020;
+	--color-layer: rgba(32, 32, 32, 0.8);
+	--color-text: #f0f0f0;
+	--color-subtext: #c0c0c0;
+}
+
+:root {
+	color-scheme: dark;
+	font-size: 18px;
+	@apply bg-background text-text;
+}
+
+main {
+	@apply p-4;
+}
