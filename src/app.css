@@ -12,6 +12,8 @@
 	color-scheme: dark;
 	font-size: 18px;
 	@apply bg-background text-text;
+
+	-webkit-tap-highlight-color: transparent;
 }
 
 main {
