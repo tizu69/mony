@@ -4,31 +4,45 @@
 
 	let {
 		value = $bindable(),
-		writeable = false
+		writeable = false,
+		maximum = 1_000_000_00
 	}: {
 		value: number;
 		writeable?: boolean;
+		maximum?: number;
 	} = $props();
+
+	// this weird setup essentially ensures that the number animates on first
+	// render as well
+	let displayedValue = $state(0);
+	$effect(() => {
+		displayedValue = value / 100;
+	});
 </script>
 
 <div class="relative">
 	<NumberFlow
-		class="text-5xl font-bold"
+		class="px-2 text-5xl font-bold tabular-nums"
 		locales={store.current.locale}
 		format={{ currency: store.current.currency, style: 'currency' }}
-		{value}
+		value={displayedValue}
 	/>
 	{#if writeable}
 		<input
 			type="number"
-			bind:value
-			class="absolute inset-0 h-full w-full cursor-text text-[1px] opacity-0"
-			onchange={(e) => {
-				// on change, update the value to be a float with 2 decimal places
-				value = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
-				if (isNaN(value)) value = 0;
-				if (value < 0) value = 0;
-				if (value > 999_999) value = 999_999;
+			class="peer absolute inset-0 h-full w-full opacity-0"
+			onkeypress={(e) => e.preventDefault()}
+			onkeydown={(e) => {
+				e.preventDefault();
+				if (e.key === 'Backspace' || e.key === 'Delete') {
+					// remove last digit
+					value = Math.floor(value / 10);
+				} else if (e.key >= '0' && e.key <= '9') {
+					// add new digit
+					let next = value * 10 + parseInt(e.key);
+					next = Math.min(Math.max(next, 0), maximum);
+					value = next;
+				}
 			}}
 		/>
 	{/if}

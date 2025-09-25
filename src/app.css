@@ -3,7 +3,7 @@
 @theme {
 	--color-*: initial;
 	--color-background: #202020;
-	--color-layer: rgba(32, 32, 32, 0.8);
+	--color-layer: #404040;
 	--color-text: #f0f0f0;
 	--color-subtext: #c0c0c0;
 }
