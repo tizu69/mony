@@ -70,9 +70,9 @@
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class={[
-				'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl',
-				'bg-back0/50 text-text max-h-[90dvh] py-4 backdrop-blur-xl',
-				'lg:bg-back0/75 hc:bg-back0 hc:border overflow-x-clip overflow-y-auto',
+				'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl border-t',
+				'max-h-[90dvh] bg-background/50 py-4 text-text backdrop-blur-xl',
+				'overflow-x-clip overflow-y-auto lg:bg-background/75',
 				className
 			]}
 			style="transform: translateY({translateY}%);
@@ -82,7 +82,7 @@
 			bind:this={dialogDiv}
 		>
 			{#if dismissible}
-				<button class="button sm absolute top-2 right-2 !p-1" onclick={() => (open = false)}>
+				<button class="button layer sm absolute top-2 right-2 !p-1" onclick={() => (open = false)}>
 					<LucideX class="size-4" />
 				</button>
 			{/if}

@@ -3,7 +3,7 @@ export interface Project {
 	name: string;
 }
 
-export interface Fund {
+export interface Trans {
 	project: string;
 	id: string;
 	date: number; // unix timestamp

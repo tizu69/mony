@@ -4,6 +4,7 @@
 	import { store } from '$lib/monystore';
 	import { flip } from 'svelte/animate';
 	import { slide } from 'svelte/transition';
+	import Transaction from './Transaction.svelte';
 
 	const { data } = $props();
 	const project = $derived(data.project);
@@ -37,16 +38,8 @@
 
 	<div class="space-y-1">
 		{#each store.getTrans(project).toReversed() as trans (trans.id)}
-			<div class="layer button flex items-center justify-between" animate:flip in:slide>
-				<div>
-					<p>{trans.reason}</p>
-					<p class="text-subtext">
-						{dtf.format(new Date(trans.date))}
-					</p>
-				</div>
-				<div>
-					<Number small value={trans.amount} />
-				</div>
+			<div animate:flip transition:slide>
+				<Transaction {trans} {dtf} />
 			</div>
 		{/each}
 	</div>

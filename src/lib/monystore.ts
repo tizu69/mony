@@ -1,11 +1,11 @@
 import { persistedState } from 'svelte-persisted-state';
-import type { Fund, Project } from './types';
+import type { Trans, Project } from './types';
 import { sum } from './utils';
 import { nanoid } from 'nanoid';
 
 export const defaultStore = {
 	projects: [] as Project[],
-	funds: [] as Fund[],
+	trans: [] as Trans[],
 
 	locale: 'de-DE',
 	currency: 'EUR'
@@ -21,9 +21,11 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	getProject: (id: string) => Project | undefined;
 	addProject: (name: string) => Project;
 	deleteProject: (project: Project) => void;
-	getTrans: (project: Project) => Fund[];
+	getTrans: (project: Project) => Trans[];
 	addTrans: (project: Project, cents: number, reason: string) => void;
+	deleteTrans: (trans: Trans) => void;
 	getFunds: (project: Project) => number;
+	getFundsWithoutTrans: (trans: Trans) => number;
 };
 store.current = { ...defaultStore, ...store.current };
 
@@ -34,15 +36,20 @@ store.addProject = (name: string) => {
 };
 store.deleteProject = (project: Project) => {
 	store.current.projects = store.current.projects.filter((p) => p.id !== project.id);
-	store.current.funds = store.current.funds.filter((f) => f.project !== project.id);
+	store.current.trans = store.current.trans.filter((f) => f.project !== project.id);
 };
-store.getTrans = (project: Project) => store.current.funds.filter((f) => f.project === project.id);
+store.getTrans = (project: Project) => store.current.trans.filter((f) => f.project === project.id);
 store.addTrans = (project: Project, cents: number, reason: string) =>
-	store.current.funds.push({
+	store.current.trans.push({
 		project: project.id,
 		amount: cents,
 		reason,
 		date: new Date().getTime(),
 		id: nanoid()
 	});
+store.deleteTrans = (trans: Trans) => {
+	store.current.trans = store.current.trans.filter((t) => t.id !== trans.id);
+};
 store.getFunds = (project: Project) => sum(store.getTrans(project));
+store.getFundsWithoutTrans = (trans: Trans) =>
+	sum(store.getTrans(store.getProject(trans.project)!).filter((t) => t.id !== trans.id));
