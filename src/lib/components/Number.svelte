@@ -28,6 +28,7 @@
 		locales={store.current.locale}
 		format={{ currency: store.current.currency, style: 'currency' }}
 		value={displayedValue}
+		trend={(oldValue: number, value: number) => Math.sign(Math.abs(value) - Math.abs(oldValue))}
 	/>
 	{#if writeable}
 		<input
