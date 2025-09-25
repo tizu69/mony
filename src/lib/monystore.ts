@@ -20,8 +20,8 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 
 	getProject: (id: string) => Project | undefined;
 	addProject: (name: string) => Project;
-	getWalletFunds: (project: Project) => number;
-	addWalletFund: (project: Project, cents: number, reason: string) => void;
+	getFunds: (project: Project) => number;
+	addFund: (project: Project, cents: number, reason: string) => void;
 };
 store.current = { ...defaultStore, ...store.current };
 
@@ -30,9 +30,9 @@ store.addProject = (name: string) => {
 	store.current.projects.push({ id: nanoid(), name });
 	return store.current.projects[store.current.projects.length - 1];
 };
-store.getWalletFunds = (project: Project) =>
+store.getFunds = (project: Project) =>
 	sum(store.current.funds.filter((f) => f.project === project.id));
-store.addWalletFund = (project: Project, cents: number, reason: string) =>
+store.addFund = (project: Project, cents: number, reason: string) =>
 	store.current.funds.push({
 		project: project.id,
 		amount: cents,
