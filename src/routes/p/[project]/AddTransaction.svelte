@@ -63,7 +63,8 @@
 	</div>
 
 	<button
-		class="button accent w-full"
+		class="button not-disabled:accent disabled:layer w-full disabled:opacity-50"
+		disabled={!reason || !amount}
 		onclick={() => {
 			if (!confirmData) createTrans();
 			else confirmOpen = true;
