@@ -29,14 +29,14 @@ export default (
 			return {
 				title: 'Large purchase',
 				text: `This will use ${Math.round((amount / funds) * 100)}% of your available funds. Continue?`,
-				waitFor: 3
+				waitFor: 5
 			};
 	} else {
 		if (!isFirstTrans)
 			return {
 				title: 'Already added funds',
 				text: 'You have already added funds. Adding more may indicate overspending habits - continue anyway?',
-				waitFor: 3
+				waitFor: 5
 			};
 	}
 };
