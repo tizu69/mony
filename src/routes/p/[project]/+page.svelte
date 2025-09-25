@@ -7,6 +7,7 @@
 	import { flip } from 'svelte/animate';
 	import { slide } from 'svelte/transition';
 	import Transaction from './Transaction.svelte';
+	import AddTransaction from './AddTransaction.svelte';
 
 	const { data } = $props();
 	const project = $derived(data.project);
@@ -31,15 +32,13 @@
 		<Number value={store.getFunds(project)} />
 	</div>
 
-	<button
+	<AddTransaction
 		class="button accent fixed right-6 bottom-6 z-10 !rounded-2xl !py-4"
 		onclick={() => store.addTrans(project, Math.round(Math.random() * 10), 'foo')}
+		{project}
 	>
 		<LucidePlus />
-	</button>
-	<button onclick={() => store.addTrans(project, -Math.round(Math.random() * 10), 'bar')}>
-		Sub EUR
-	</button>
+	</AddTransaction>
 
 	<div class="grid grid-cols-1 gap-1 md:grid-cols-2">
 		{#each store.getTrans(project).toReversed() as trans (trans.id)}

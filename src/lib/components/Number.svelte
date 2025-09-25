@@ -6,14 +6,12 @@
 		value = $bindable(),
 		writeable = false,
 		maximum = 1_000_000_00,
-		small = false,
-		onsign
+		small = false
 	}: {
 		value: number;
 		writeable?: boolean;
 		maximum?: number;
 		small?: boolean;
-		onsign?: (nowNeg: boolean) => void;
 	} = $props();
 
 	// this weird setup essentially ensures that the number animates on first
@@ -47,10 +45,9 @@
 					let next = value * 10 + parseInt(e.key);
 					next = Math.min(Math.max(next, 0), maximum);
 					value = next;
-				} else if (e.key === '-') {
-					onsign?.(value >= 0);
 				}
 			}}
+			onfocus={(e) => e.currentTarget.scrollIntoView({ behavior: 'smooth' })}
 		/>
 	{/if}
 </div>
