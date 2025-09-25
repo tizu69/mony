@@ -1,15 +1,49 @@
 <script lang="ts">
+	import ConfirmDialog from '$lib/components/ConfirmDialog.svelte';
 	import Dialog from '$lib/components/Dialog.svelte';
 	import Number from '$lib/components/Number.svelte';
 	import { store } from '$lib/monystore';
 	import type { Project } from '$lib/types';
+	import { LucideTriangleAlert } from 'lucide-svelte';
 	import type { Snippet } from 'svelte';
+	import fundWarnings from './fundWarnings';
 
 	let p: { children?: Snippet; class?: string; project: Project } = $props();
-	let isExpense = $state(store.getTrans(p.project).length > 0);
+
+	let isFirstTrans = $derived(store.getTrans(p.project).length === 0);
+
+	let isExpense = $state(false);
+	let reason = $state('');
+	let amount = $state(0);
+	function reset() {
+		isExpense = !isFirstTrans;
+		reason = '';
+		amount = 0;
+	}
+	reset();
+
+	let open = $state(false);
+	let button = $derived(isExpense ? 'Buy' : 'Add funds');
+	function createTrans() {
+		store.addTrans(p.project, isExpense ? -amount : amount, reason);
+		confirmOpen = false;
+		open = false;
+	}
+
+	let funds = $derived(store.getFunds(p.project));
+	let fundsAfter = $derived(funds + (isExpense ? -amount : amount));
+
+	let confirmOpen = $state(false);
+	let confirmData = $derived(fundWarnings(isExpense, amount, funds, fundsAfter, isFirstTrans));
 </script>
 
-<Dialog triggerClass={p.class} trigger={p.children} class="px-4">
+<Dialog
+	triggerClass={p.class}
+	bind:open
+	trigger={p.children}
+	class="space-y-2 px-4"
+	onclose={() => reset()}
+>
 	<div class="grid grid-cols-2">
 		<button class={['button', isExpense && 'accent']} onclick={() => (isExpense = true)}>
 			Expense
@@ -19,5 +53,31 @@
 		</button>
 	</div>
 
-	<Number value={12} writeable />
+	<div class="flex justify-center">
+		<Number bind:value={amount} writeable />
+	</div>
+
+	<div class="rounded border-l-4 !border-accent bg-accent/20 p-2">
+		<h2 class="font-bold">{isExpense ? 'What are you buying?' : 'Why are you adding funds?'}</h2>
+		<input type="text" bind:value={reason} class="button w-full border-b-2 !border-accent" />
+	</div>
+
+	<button
+		class="button accent w-full"
+		onclick={() => {
+			if (!confirmData) createTrans();
+			else confirmOpen = true;
+		}}
+	>
+		{button}
+	</button>
+	{#if confirmData}
+		<ConfirmDialog
+			{...confirmData}
+			bind:open={confirmOpen}
+			icon={LucideTriangleAlert}
+			{button}
+			onconfirm={() => createTrans()}
+		/>
+	{/if}
 </Dialog>

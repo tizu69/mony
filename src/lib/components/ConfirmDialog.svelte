@@ -2,7 +2,10 @@
 	import { untrack, type Snippet } from 'svelte';
 	import Dialog from './Dialog.svelte';
 
-	let p: {
+	let {
+		open = $bindable(false),
+		...p
+	}: {
 		title: string;
 		text: string;
 		button: string;
@@ -10,11 +13,10 @@
 		onconfirm: () => void;
 		waitFor?: number;
 
+		open?: boolean;
 		children?: Snippet;
 		class?: string;
 	} = $props();
-
-	let open = $state(false);
 
 	let buttonSecs = $state(0);
 	let buttonSecsTimer = $state<number>();

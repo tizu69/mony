@@ -24,7 +24,7 @@
 
 <div class="relative">
 	<NumberFlow
-		class={['px-2 font-bold tabular-nums', !small ? 'text-6xl' : 'text-2xl'].join(' ')}
+		class={['px-2 font-bold tabular-nums', !small ? 'text-5xl' : 'text-2xl'].join(' ')}
 		locales={store.current.locale}
 		format={{ currency: store.current.currency, style: 'currency' }}
 		value={displayedValue}
@@ -47,7 +47,6 @@
 					value = next;
 				}
 			}}
-			onfocus={(e) => e.currentTarget.scrollIntoView({ behavior: 'smooth' })}
 		/>
 	{/if}
 </div>

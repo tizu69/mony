@@ -32,11 +32,7 @@
 		<Number value={store.getFunds(project)} />
 	</div>
 
-	<AddTransaction
-		class="button accent fixed right-6 bottom-6 z-10 !rounded-2xl !py-4"
-		onclick={() => store.addTrans(project, Math.round(Math.random() * 10), 'foo')}
-		{project}
-	>
+	<AddTransaction class="button accent fixed right-6 bottom-6 z-10 !rounded-2xl !py-4" {project}>
 		<LucidePlus />
 	</AddTransaction>
 
