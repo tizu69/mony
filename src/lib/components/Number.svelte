@@ -6,12 +6,14 @@
 		value = $bindable(),
 		writeable = false,
 		maximum = 1_000_000_00,
-		small = false
+		small = false,
+		autofocus
 	}: {
 		value: number;
 		writeable?: boolean;
 		maximum?: number;
 		small?: boolean;
+		autofocus?: boolean;
 	} = $props();
 
 	// this weird setup essentially ensures that the number animates on first
@@ -31,7 +33,9 @@
 		trend={(oldValue: number, value: number) => Math.sign(Math.abs(value) - Math.abs(oldValue))}
 	/>
 	{#if writeable}
+		<!-- svelte-ignore a11y_autofocus -->
 		<input
+			{autofocus}
 			type="number"
 			class="peer absolute inset-0 h-full w-full opacity-0"
 			onkeypress={(e) => e.preventDefault()}

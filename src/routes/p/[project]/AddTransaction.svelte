@@ -17,7 +17,7 @@
 	let amount = $state(0);
 	function reset() {
 		isExpense = !isFirstTrans;
-		reason = '';
+		reason = isFirstTrans ? 'Initial funds' : '';
 		amount = 0;
 	}
 	reset();
@@ -44,26 +44,32 @@
 	class="space-y-2 px-4"
 	onclose={() => reset()}
 >
-	<div class="grid grid-cols-2">
-		<button class={['button', isExpense && 'accent']} onclick={() => (isExpense = true)}>
-			Expense
-		</button>
-		<button class={['button', !isExpense && 'accent']} onclick={() => (isExpense = false)}>
-			Add funds
-		</button>
-	</div>
+	{#if !isFirstTrans}
+		<div class="grid grid-cols-2">
+			<button class={['button', isExpense && 'accent']} onclick={() => (isExpense = true)}>
+				Expense
+			</button>
+			<button class={['button', !isExpense && 'accent']} onclick={() => (isExpense = false)}>
+				Add funds
+			</button>
+		</div>
+	{/if}
 
 	<div class="flex justify-center">
-		<Number bind:value={amount} writeable />
+		<Number bind:value={amount} writeable autofocus />
 	</div>
 
-	<div class="rounded border-l-4 !border-accent bg-accent/20 p-2">
-		<h2 class="font-bold">{isExpense ? 'What are you buying?' : 'Why are you adding funds?'}</h2>
-		<input type="text" bind:value={reason} class="button w-full border-b-2 !border-accent" />
-	</div>
+	{#if !isFirstTrans}
+		<input
+			type="text"
+			bind:value={reason}
+			class="button w-full layer"
+			placeholder={isExpense ? 'What are you buying?' : 'Why are you adding funds?'}
+		/>
+	{/if}
 
 	<button
-		class="button not-disabled:accent disabled:layer w-full disabled:opacity-50"
+		class="button w-full not-disabled:accent disabled:layer disabled:opacity-50"
 		disabled={!reason || !amount}
 		onclick={() => {
 			if (!confirmData) createTrans();
