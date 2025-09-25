@@ -9,7 +9,7 @@
 	let { trans, dtf }: { trans: Trans; dtf: Intl.DateTimeFormat } = $props();
 
 	let open = $state(false);
-	let canDelete = $derived(store.getFundsWithoutTrans(trans) >= 0);
+	let canDelete = $derived(store.canDeleteTrans(trans));
 </script>
 
 <button

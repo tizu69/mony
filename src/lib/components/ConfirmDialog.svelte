@@ -35,7 +35,7 @@
 	<p class="text-center text-sm text-subtext">{p.text}</p>
 	<button
 		disabled={!!buttonSecs}
-		class={['button accent mt-4 w-full', !!buttonSecs && 'opacity-75']}
+		class={['button mt-4 w-full', !buttonSecs ? 'accent' : 'layer opacity-75']}
 		onclick={() => {
 			open = false;
 			p.onconfirm();
