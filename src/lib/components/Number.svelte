@@ -7,20 +7,27 @@
 		writeable = false,
 		maximum = 1_000_000_00,
 		small = false,
-		autofocus
+		autofocus,
+		type = 'currency'
 	}: {
 		value: number;
 		writeable?: boolean;
 		maximum?: number;
 		small?: boolean;
 		autofocus?: boolean;
+		type?: 'currency' | 'number';
 	} = $props();
+
+	let format = $derived.by(() => {
+		if (type === 'currency') return { currency: store.current.currency, style: 'currency' };
+		if (type === 'number') return { style: 'decimal' };
+	});
 
 	// this weird setup essentially ensures that the number animates on first
 	// render as well
 	let displayedValue = $state(0);
 	$effect(() => {
-		displayedValue = value / 100;
+		displayedValue = type !== 'currency' ? value : value / 100;
 	});
 </script>
 
@@ -28,7 +35,7 @@
 	<NumberFlow
 		class={['px-2 font-bold tabular-nums', !small ? 'text-5xl' : 'text-2xl'].join(' ')}
 		locales={store.current.locale}
-		format={{ currency: store.current.currency, style: 'currency' }}
+		{format}
 		value={displayedValue}
 		trend={(oldValue: number, value: number) => Math.sign(Math.abs(value) - Math.abs(oldValue))}
 	/>

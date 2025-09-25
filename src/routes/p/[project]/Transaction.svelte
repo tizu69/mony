@@ -13,12 +13,12 @@
 </script>
 
 <button
-	class="layer button flex w-full items-center justify-between text-left"
+	class="button flex w-full items-center justify-between layer text-left"
 	onclick={() => (open = !open)}
 >
 	<div>
 		<p>{trans.reason}</p>
-		<p class="text-subtext">
+		<p class="text-sm text-subtext">
 			{dtf.format(trans.date)}
 		</p>
 	</div>

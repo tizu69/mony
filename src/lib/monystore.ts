@@ -26,6 +26,7 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	deleteTrans: (trans: Trans) => void;
 	getFunds: (project: Project) => number;
 	canDeleteTrans: (trans: Trans) => boolean;
+	getFundsUsedInTime: (project: Project, hours: number) => number;
 };
 store.current = { ...defaultStore, ...store.current };
 
@@ -63,4 +64,11 @@ store.canDeleteTrans = (trans: Trans) => {
 		if (balance < 0) return false;
 	}
 	return true;
+};
+store.getFundsUsedInTime = (project: Project, hours: number) => {
+	const time = new Date().getTime() - 60 * 60 * 1000 * hours;
+	const trans = store.getTrans(project).filter((f) => f.amount < 0 && f.date > time);
+	const result = sum(trans);
+	if (result < 0) return -result;
+	return 0;
 };

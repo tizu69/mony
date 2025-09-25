@@ -8,6 +8,7 @@
 	import { slide } from 'svelte/transition';
 	import Transaction from './Transaction.svelte';
 	import AddTransaction from './AddTransaction.svelte';
+	import StatGuesser from './StatGuesser.svelte';
 
 	const { data } = $props();
 	const project = $derived(data.project);
@@ -32,17 +33,18 @@
 		<Number value={store.getFunds(project)} />
 	</div>
 
-	<AddTransaction class="button accent fixed right-6 bottom-6 z-10 !rounded-2xl !py-4" {project}>
-		<LucidePlus />
-	</AddTransaction>
+	<StatGuesser {project} />
 
-	<div class="grid grid-cols-1 gap-1 md:grid-cols-2">
+	<div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2">
 		{#each store.getTrans(project).toReversed() as trans (trans.id)}
 			<div animate:flip transition:slide>
 				<Transaction {trans} {dtf} />
 			</div>
 		{/each}
 	</div>
+	<AddTransaction class="button fixed right-6 bottom-6 z-10 !rounded-2xl accent !py-4" {project}>
+		<LucidePlus />
+	</AddTransaction>
 
 	<ConfirmDialog
 		icon={LucideWallet}
