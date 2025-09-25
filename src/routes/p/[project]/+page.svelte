@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import ConfirmDialog from '$lib/components/ConfirmDialog.svelte';
 	import Number from '$lib/components/Number.svelte';
 	import { store } from '$lib/monystore';
+	import { LucideWallet } from 'lucide-svelte';
 	import { flip } from 'svelte/animate';
 	import { slide } from 'svelte/transition';
 	import Transaction from './Transaction.svelte';
@@ -44,15 +46,20 @@
 		{/each}
 	</div>
 
-	<button
-		class="button text-xs text-subtext underline"
-		onclick={() => {
-			if (!confirm('Are you sure you want to delete this project? This action cannot be undone.'))
-				return;
-			store.deleteProject(project);
-			goto(`/`);
+	<ConfirmDialog
+		icon={LucideWallet}
+		title="Delete {project.name}? 🥺"
+		text="This cannot be undone. All the funds & expenses you added will be gone. Are you sure?"
+		button="Delete"
+		waitFor={10}
+		onconfirm={() => {
+			setTimeout(() => {
+				store.deleteProject(project);
+				goto(`/`);
+			}, 500);
 		}}
+		class="button text-xs text-subtext underline"
 	>
 		Delete Project
-	</button>
+	</ConfirmDialog>
 </main>
