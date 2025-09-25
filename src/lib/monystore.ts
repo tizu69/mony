@@ -20,6 +20,7 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 
 	getProject: (id: string) => Project | undefined;
 	addProject: (name: string) => Project;
+	deleteProject: (project: Project) => void;
 	getFunds: (project: Project) => number;
 	addFund: (project: Project, cents: number, reason: string) => void;
 };
@@ -29,6 +30,10 @@ store.getProject = (id) => store.current.projects.find((p) => p.id === id);
 store.addProject = (name: string) => {
 	store.current.projects.push({ id: nanoid(), name });
 	return store.current.projects[store.current.projects.length - 1];
+};
+store.deleteProject = (project: Project) => {
+	store.current.projects = store.current.projects.filter((p) => p.id !== project.id);
+	store.current.funds = store.current.funds.filter((f) => f.project !== project.id);
 };
 store.getFunds = (project: Project) =>
 	sum(store.current.funds.filter((f) => f.project === project.id));

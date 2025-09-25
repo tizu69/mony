@@ -18,15 +18,7 @@
 			goto(`/p/${project.id}`);
 		}}
 	>
-		<input
-			type="text"
-			placeholder="Project name"
-			required
-			name="name"
-			class="mr-2 rounded bg-layer p-2"
-		/>
-		<button type="submit" class="rounded bg-accent px-4 py-2 font-bold text-background">
-			-&gt;
-		</button>
+		<input type="text" placeholder="Project name" required name="name" class="button layer mr-2" />
+		<button type="submit" class="button accent"> -&gt; </button>
 	</form>
 </main>

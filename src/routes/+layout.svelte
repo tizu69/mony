@@ -14,7 +14,10 @@
 <header class="flex space-x-2 overflow-x-scroll p-4">
 	{#snippet card(text: string, href: string)}
 		{@const current = page.url.pathname === new URL(href, page.url).pathname}
-		<a {href} class={['rounded-full px-2', current ? 'bg-accent text-background' : 'bg-layer']}>
+		<a
+			{href}
+			class={['rounded-full px-2 text-nowrap', current ? 'bg-accent text-background' : 'bg-layer']}
+		>
 			{text}
 		</a>
 	{/snippet}
