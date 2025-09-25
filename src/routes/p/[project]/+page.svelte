@@ -3,7 +3,7 @@
 	import ConfirmDialog from '$lib/components/ConfirmDialog.svelte';
 	import Number from '$lib/components/Number.svelte';
 	import { store } from '$lib/monystore';
-	import { LucideWallet } from 'lucide-svelte';
+	import { LucidePlus, LucideWallet } from 'lucide-svelte';
 	import { flip } from 'svelte/animate';
 	import { slide } from 'svelte/transition';
 	import Transaction from './Transaction.svelte';
@@ -31,8 +31,11 @@
 		<Number value={store.getFunds(project)} />
 	</div>
 
-	<button onclick={() => store.addTrans(project, Math.round(Math.random() * 10), 'foo')}>
-		Add EUR
+	<button
+		class="button accent fixed right-6 bottom-6 z-10 !rounded-2xl !py-4"
+		onclick={() => store.addTrans(project, Math.round(Math.random() * 10), 'foo')}
+	>
+		<LucidePlus />
 	</button>
 	<button onclick={() => store.addTrans(project, -Math.round(Math.random() * 10), 'bar')}>
 		Sub EUR
@@ -58,7 +61,7 @@
 				goto(`/`);
 			}, 500);
 		}}
-		class="button text-xs text-subtext underline"
+		class="my-2 py-4 text-xs text-subtext underline "
 	>
 		Delete Project
 	</ConfirmDialog>
