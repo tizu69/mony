@@ -21,8 +21,9 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	getProject: (id: string) => Project | undefined;
 	addProject: (name: string) => Project;
 	deleteProject: (project: Project) => void;
+	getTrans: (project: Project) => Fund[];
+	addTrans: (project: Project, cents: number, reason: string) => void;
 	getFunds: (project: Project) => number;
-	addFund: (project: Project, cents: number, reason: string) => void;
 };
 store.current = { ...defaultStore, ...store.current };
 
@@ -35,9 +36,8 @@ store.deleteProject = (project: Project) => {
 	store.current.projects = store.current.projects.filter((p) => p.id !== project.id);
 	store.current.funds = store.current.funds.filter((f) => f.project !== project.id);
 };
-store.getFunds = (project: Project) =>
-	sum(store.current.funds.filter((f) => f.project === project.id));
-store.addFund = (project: Project, cents: number, reason: string) =>
+store.getTrans = (project: Project) => store.current.funds.filter((f) => f.project === project.id);
+store.addTrans = (project: Project, cents: number, reason: string) =>
 	store.current.funds.push({
 		project: project.id,
 		amount: cents,
@@ -45,3 +45,4 @@ store.addFund = (project: Project, cents: number, reason: string) =>
 		date: new Date().toISOString(),
 		id: nanoid()
 	});
+store.getFunds = (project: Project) => sum(store.getTrans(project));

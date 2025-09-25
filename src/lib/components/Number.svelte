@@ -5,11 +5,13 @@
 	let {
 		value = $bindable(),
 		writeable = false,
-		maximum = 1_000_000_00
+		maximum = 1_000_000_00,
+		small = false
 	}: {
 		value: number;
 		writeable?: boolean;
 		maximum?: number;
+		small?: boolean;
 	} = $props();
 
 	// this weird setup essentially ensures that the number animates on first
@@ -22,7 +24,7 @@
 
 <div class="relative">
 	<NumberFlow
-		class="px-2 text-5xl font-bold tabular-nums"
+		class={['px-2 font-bold tabular-nums', !small ? 'text-6xl' : 'text-2xl'].join(' ')}
 		locales={store.current.locale}
 		format={{ currency: store.current.currency, style: 'currency' }}
 		value={displayedValue}
