@@ -38,7 +38,7 @@
 		Sub EUR
 	</button>
 
-	<div class="space-y-1">
+	<div class="grid grid-cols-1 gap-1 md:grid-cols-2">
 		{#each store.getTrans(project).toReversed() as trans (trans.id)}
 			<div animate:flip transition:slide>
 				<Transaction {trans} {dtf} />
