@@ -42,7 +42,7 @@ store.addTrans = (project: Project, cents: number, reason: string) =>
 		project: project.id,
 		amount: cents,
 		reason,
-		date: new Date().toISOString(),
+		date: new Date().getTime(),
 		id: nanoid()
 	});
 store.getFunds = (project: Project) => sum(store.getTrans(project));

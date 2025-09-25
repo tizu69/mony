@@ -6,7 +6,7 @@ export interface Project {
 export interface Fund {
 	project: string;
 	id: string;
-	date: string; // ISO date string
+	date: number; // unix timestamp
 	amount: number; // in cents
 	reason: string;
 }
