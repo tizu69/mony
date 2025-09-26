@@ -38,3 +38,6 @@ main {
 	@apply w-full button border-2 border-layer bg-layer/50 shadow-inner;
 	@apply transition-all focus:!border-accent/50 focus:outline-none;
 }
+@utility link-select {
+	@apply appearance-none bg-transparent text-accent underline focus:outline-none;
+}

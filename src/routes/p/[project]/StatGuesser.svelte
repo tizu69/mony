@@ -15,10 +15,7 @@
 	<div class="flex flex-col rounded-lg bg-layer p-4">
 		<p class="text-sm text-subtext">
 			Spent in
-			<select
-				bind:value={scope}
-				class="appearance-none bg-transparent text-accent underline focus:outline-none"
-			>
+			<select bind:value={scope} class="link-select">
 				<option value={0.25}>15m</option>
 				<option value={1}>1h</option>
 				<option value={24}>24h</option>

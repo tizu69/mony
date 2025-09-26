@@ -7,7 +7,7 @@ export const defaultStore = {
 	projects: [] as Project[],
 	trans: [] as Trans[],
 
-	locale: 'de-DE',
+	locale: 'de',
 	currency: 'EUR'
 };
 

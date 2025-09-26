@@ -10,7 +10,7 @@
 		text: string;
 		button: string;
 		icon: ConstructorOfATypedSvelteComponent;
-		onconfirm: () => void;
+		onconfirm?: () => void;
 		waitFor?: number;
 
 		open?: boolean;
@@ -38,12 +38,12 @@
 	<button
 		disabled={!!buttonSecs}
 		class={[
-			'button mt-6 w-full transition-colors',
-			!buttonSecs ? 'accent hover:bg-accent/75' : 'layer cursor-not-allowed opacity-50'
+			'mt-6 w-full button transition-colors',
+			!buttonSecs ? 'accent hover:bg-accent/75' : 'cursor-not-allowed layer opacity-50'
 		]}
 		onclick={() => {
 			open = false;
-			p.onconfirm();
+			p.onconfirm?.();
 		}}
 	>
 		{p.button}
