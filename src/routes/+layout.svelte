@@ -29,7 +29,7 @@
 	<a href="/">
 		<img src="/pwa_icon.png" alt="mony" class="size-8 min-w-8 rounded-lg" />
 	</a>
-	{#each store.current.projects as project}
+	{#each store.getProjects() as project}
 		{@render card(project.name, `/p/${project.id}`)}
 	{/each}
 	{@render card('+', `/`)}

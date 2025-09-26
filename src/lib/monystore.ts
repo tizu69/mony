@@ -18,6 +18,7 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	current: Store;
 	reset: () => void;
 
+	getProjects: () => Project[];
 	getProject: (id: string) => Project | undefined;
 	addProject: (name: string) => Project;
 	deleteProject: (project: Project) => void;
@@ -30,6 +31,13 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 };
 store.current = { ...defaultStore, ...store.current };
 
+store.getProjects = () =>
+	store.current.projects.toSorted((a, b) => {
+		const aTrans = store.getTrans(a).at(-1);
+		const bTrans = store.getTrans(b).at(-1);
+		if (!aTrans || !bTrans) return 0;
+		return bTrans.date - aTrans.date;
+	});
 store.getProject = (id) => store.current.projects.find((p) => p.id === id);
 store.addProject = (name: string) => {
 	store.current.projects.push({ id: nanoid(), name });
