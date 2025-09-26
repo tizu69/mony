@@ -59,6 +59,7 @@
 					value = next;
 				}
 			}}
+			onfocus={(e) => e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' 	}) }}
 		/>
 	{/if}
 </div>
