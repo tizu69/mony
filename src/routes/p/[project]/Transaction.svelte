@@ -36,23 +36,25 @@
 		</p>
 	</div>
 
-	<ConfirmDialog
-		icon={LucideTrash2}
-		title={canDelete ? 'Delete this transaction?' : 'Cannot delete transaction'}
-		text={canDelete
-			? 'This cannot be undone.'
-			: 'You would be out of funds if you chose to delete this.'}
-		button="Delete"
-		waitFor={canDelete ? 3 : -1}
-		onconfirm={() => {
-			open = false;
-			setTimeout(() => {
-				store.deleteTrans(trans);
-			}, 500);
-		}}
-		class="button w-full bg-red-500/20 text-red-500 hover:bg-red-500/40"
-	>
-		<LucideTrash2 class="inline-block size-4" />
-		Delete
-	</ConfirmDialog>
+	<div class="flex justify-center">
+		<ConfirmDialog
+			icon={LucideTrash2}
+			title={canDelete ? 'Delete this transaction?' : 'Cannot delete transaction'}
+			text={canDelete
+				? 'This cannot be undone.'
+				: 'You would be out of funds if you chose to delete this.'}
+			button="Delete"
+			waitFor={canDelete ? 3 : -1}
+			onconfirm={() => {
+				open = false;
+				setTimeout(() => {
+					store.deleteTrans(trans);
+				}, 500);
+			}}
+			class="flex flex-col items-center gap-2 button layer pt-3 text-xs"
+		>
+			<LucideTrash2 />
+			Delete
+		</ConfirmDialog>
+	</div>
 </Dialog>

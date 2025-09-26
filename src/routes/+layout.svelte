@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import { store } from '$lib/monystore';
 	import { page } from '$app/state';
 
@@ -8,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/pwa_icon.png" />
 </svelte:head>
 
 <header
@@ -19,7 +18,7 @@
 		<a
 			{href}
 			class={[
-				'rounded-full px-4 py-2 text-nowrap transition-colors',
+				'rounded-full px-3 py-1 text-nowrap transition-colors',
 				current ? 'bg-accent text-background' : 'bg-layer hover:bg-layer/50'
 			]}
 		>
@@ -27,6 +26,9 @@
 		</a>
 	{/snippet}
 
+	<a href="/">
+		<img src="/pwa_icon.png" alt="mony" class="size-8 rounded-lg" />
+	</a>
 	{#each store.current.projects as project}
 		{@render card(project.name, `/p/${project.id}`)}
 	{/each}

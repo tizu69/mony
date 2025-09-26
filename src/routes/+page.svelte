@@ -34,11 +34,11 @@
 			autocomplete="off"
 			required
 			name="name"
-			class="button border-2 border-layer bg-layer/50 shadow-inner transition-all focus:!border-accent/50 focus:outline-none"
+			class="input"
 		/>
 		<button
 			type="submit"
-			class="button mx-auto accent transition-transform hover:scale-110 active:scale-90"
+			class="mx-auto mt-2 button accent transition-transform hover:scale-110 active:scale-90"
 		>
 			<LucideChevronRight />
 		</button>

@@ -24,7 +24,7 @@ main {
 	@apply mx-auto flex max-w-(--breakpoint-md) flex-col p-4;
 }
 
-.button {
+@utility button {
 	@apply rounded px-4 py-2;
 }
 @utility accent {
@@ -32,4 +32,9 @@ main {
 }
 @utility layer {
 	@apply bg-layer;
+}
+
+@utility input {
+	@apply w-full button border-2 border-layer bg-layer/50 shadow-inner;
+	@apply transition-all focus:!border-accent/50 focus:outline-none;
 }

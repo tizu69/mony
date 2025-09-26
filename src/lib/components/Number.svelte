@@ -59,8 +59,12 @@
 					value = next;
 				}
 			}}
-			onfocus={(e) =>
-				e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })}
+			onfocus={(e) => {
+				const t = e.currentTarget;
+				setTimeout(() => {
+					t.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+				}, 50);
+			}}
 		/>
 	{/if}
 </div>

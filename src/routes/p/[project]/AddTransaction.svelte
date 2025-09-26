@@ -71,7 +71,7 @@
 		<input
 			type="text"
 			bind:value={reason}
-			class="button w-full border-2 border-layer bg-layer/50 shadow-inner transition-all focus:!border-accent/50 focus:outline-none"
+			class="input"
 			placeholder={isExpense ? 'What are you buying?' : 'Why are you adding funds?'}
 		/>
 	{/if}
