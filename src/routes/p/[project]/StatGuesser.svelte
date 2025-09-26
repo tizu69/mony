@@ -19,8 +19,8 @@
 			<option value={0.25}>15m</option>
 			<option value={1}>1h</option>
 			<option value={24}>24h</option>
-			<option value={7}>7d</option>
-			<option value={30}>30d</option>
+			<option value={24 * 7}>7d</option>
+			<option value={24 * 30}>30d</option>
 		</select>
 	</div>
 	<div class="flex items-end rounded layer p-2 pb-1">
