@@ -11,12 +11,17 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<header class="flex space-x-2 overflow-x-scroll p-4">
+<header
+	class="sticky top-0 z-10 flex space-x-2 overflow-x-scroll bg-background/80 p-4 backdrop-blur-sm"
+>
 	{#snippet card(text: string, href: string)}
 		{@const current = page.url.pathname === new URL(href, page.url).pathname}
 		<a
 			{href}
-			class={['rounded-full px-2 text-nowrap', current ? 'bg-accent text-background' : 'bg-layer']}
+			class={[
+				'rounded-full px-4 py-2 text-nowrap transition-colors',
+				current ? 'bg-accent text-background' : 'bg-layer hover:bg-layer/50'
+			]}
 		>
 			{text}
 		</a>

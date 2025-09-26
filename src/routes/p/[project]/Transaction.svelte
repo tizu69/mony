@@ -13,45 +13,46 @@
 </script>
 
 <button
-	class="button flex w-full items-center justify-between layer text-left"
+	class="flex w-full items-center justify-between rounded-lg bg-layer p-4 text-left transition-colors hover:bg-layer/50"
 	onclick={() => (open = !open)}
 >
 	<div>
-		<p>{trans.reason}</p>
+		<p class="font-bold">{trans.reason}</p>
 		<p class="text-sm text-subtext">
 			{dtf.format(trans.date)}
 		</p>
 	</div>
-	<div>
+	<div class="text-right">
 		<Number small value={trans.amount} />
 	</div>
 </button>
 
-<Dialog bind:open class="px-4">
-	<div class="flex justify-center">
+<Dialog bind:open class="flex flex-col gap-4 px-4">
+	<div class="flex flex-col items-center gap-2">
 		<Number value={trans.amount} />
+		<p class="text-center text-2xl font-bold">{trans.reason}</p>
+		<p class="text-sm text-subtext">
+			{dtf.format(trans.date)}
+		</p>
 	</div>
 
-	<p class="text-center text-2xl">{trans.reason}</p>
-	<p class="mt-4 text-subtext">
-		Added {dtf.format(trans.date)}.
-		<ConfirmDialog
-			icon={LucideTrash2}
-			title={canDelete ? 'Delete this transaction?' : 'Cannot delete transaction'}
-			text={canDelete
-				? 'This cannot be undone.'
-				: 'You would be out of funds if you chose to delete this.'}
-			button="Delete"
-			waitFor={canDelete ? 3 : -1}
-			onconfirm={() => {
-				open = false;
-				setTimeout(() => {
-					store.deleteTrans(trans);
-				}, 500);
-			}}
-			class="underline"
-		>
-			Undo
-		</ConfirmDialog>
-	</p>
+	<ConfirmDialog
+		icon={LucideTrash2}
+		title={canDelete ? 'Delete this transaction?' : 'Cannot delete transaction'}
+		text={canDelete
+			? 'This cannot be undone.'
+			: 'You would be out of funds if you chose to delete this.'}
+		button="Delete"
+		waitFor={canDelete ? 3 : -1}
+		onconfirm={() => {
+			open = false;
+			setTimeout(() => {
+				store.deleteTrans(trans);
+			}, 500);
+		}}
+		class="button w-full bg-red-500/20 text-red-500 hover:bg-red-500/40"
+	>
+		<LucideTrash2 class="inline-block size-4" />
+		Delete
+	</ConfirmDialog>
 </Dialog>

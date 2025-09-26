@@ -31,7 +31,7 @@
 	});
 </script>
 
-<div class="relative">
+<div class="relative rounded-lg transition-colors peer-focus-within:bg-layer/50">
 	<NumberFlow
 		class={['px-2 font-bold tabular-nums', !small ? 'text-5xl' : 'text-2xl'].join(' ')}
 		locales={store.current.locale}

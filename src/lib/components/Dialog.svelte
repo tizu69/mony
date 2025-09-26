@@ -69,13 +69,12 @@
 	>
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
-			class={[
-				'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl border-t',
-				'max-h-[90dvh] bg-background/50 py-4 text-text backdrop-blur-xl',
-				'overflow-x-clip overflow-y-auto lg:bg-background/75',
-				className
-			]}
-			style="transform: translateY({translateY}%);
+			            class={[
+							'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl border-t',
+							'max-h-[90dvh] border-layer bg-layer/50 py-4 text-text shadow-2xl backdrop-blur-2xl',
+							'overflow-x-clip overflow-y-auto lg:bg-layer/75',
+							className
+						]}			style="transform: translateY({translateY}%);
             transform-origin: bottom center;
             scale: {scale}%;"
 			onclick={(e) => e.stopPropagation()}

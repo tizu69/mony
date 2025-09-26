@@ -11,20 +11,25 @@
 	let daysLeft = $derived(Math.floor((scope * (available / fundsUsed)) / 24));
 </script>
 
-<div class="grid grid-cols-[auto_auto] gap-1">
-	<div class="flex items-end rounded layer p-2 pb-1">
+<div class="grid grid-cols-2 gap-4">
+	<div class="flex flex-col rounded-lg bg-layer p-4">
+		<p class="text-sm text-subtext">
+			Spent in
+			<select
+				bind:value={scope}
+				class="appearance-none bg-transparent text-accent underline focus:outline-none"
+			>
+				<option value={0.25}>15m</option>
+				<option value={1}>1h</option>
+				<option value={24}>24h</option>
+				<option value={24 * 7}>7d</option>
+				<option value={24 * 30}>30d</option>
+			</select>
+		</p>
 		<Number small value={fundsUsed} />
-		<p class="pb-1">/</p>
-		<select bind:value={scope} class="pb-1">
-			<option value={0.25}>15m</option>
-			<option value={1}>1h</option>
-			<option value={24}>24h</option>
-			<option value={24 * 7}>7d</option>
-			<option value={24 * 30}>30d</option>
-		</select>
 	</div>
-	<div class="flex items-end rounded layer p-2 pb-1">
+	<div class="flex flex-col rounded-lg bg-layer p-4">
+		<p class="text-sm text-subtext">Est. days left</p>
 		<Number small value={daysLeft !== daysLeft ? Infinity : daysLeft} type="number" />
-		<p class="pb-1">days</p>
 	</div>
 </div>

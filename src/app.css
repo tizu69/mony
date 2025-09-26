@@ -2,11 +2,11 @@
 
 @theme {
 	--color-*: initial;
-	--color-background: #202020;
-	--color-layer: #404040;
-	--color-accent: #a6c1f7;
-	--color-text: #f0f0f0;
-	--color-subtext: #c0c0c0;
+	--color-background: #1a202c;
+	--color-layer: #2d3748;
+	--color-accent: #4fd1c5;
+	--color-text: #f7fafc;
+	--color-subtext: #e2e8f0;
 }
 
 :root {

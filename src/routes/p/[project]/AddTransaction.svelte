@@ -45,13 +45,21 @@
 	onclose={() => reset()}
 >
 	{#if !isFirstTrans}
-		<div class="grid grid-cols-2">
-			<button class={['button', isExpense && 'accent']} onclick={() => (isExpense = true)}>
-				Expense
-			</button>
-			<button class={['button', !isExpense && 'accent']} onclick={() => (isExpense = false)}>
-				Add funds
-			</button>
+		<div class="mr-6 flex rounded-full bg-layer p-1">
+			<button
+				class={[
+					'w-full rounded-full py-2 text-center transition-colors',
+					isExpense ? 'bg-accent text-background' : 'hover:bg-layer'
+				]}
+				onclick={() => (isExpense = true)}>Expense</button
+			>
+			<button
+				class={[
+					'w-full rounded-full py-2 text-center transition-colors',
+					!isExpense ? 'bg-accent text-background' : 'hover:bg-layer'
+				]}
+				onclick={() => (isExpense = false)}>Add funds</button
+			>
 		</div>
 	{/if}
 
@@ -63,13 +71,13 @@
 		<input
 			type="text"
 			bind:value={reason}
-			class="button w-full layer"
+			class="button w-full border-2 border-layer bg-layer/50 shadow-inner transition-all focus:!border-accent/50 focus:outline-none"
 			placeholder={isExpense ? 'What are you buying?' : 'Why are you adding funds?'}
 		/>
 	{/if}
 
 	<button
-		class="button w-full not-disabled:accent disabled:layer disabled:opacity-50"
+		class="button w-full transition-transform not-disabled:accent not-disabled:hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
 		disabled={!reason || !amount}
 		onclick={() => {
 			if (!confirmData) createTrans();

@@ -9,10 +9,14 @@
 </svelte:head>
 
 <main class="flex min-h-[80dvh] flex-col items-center justify-center p-4">
-	<h1 class="mb-4 text-4xl font-bold">mony</h1>
+	<h1
+		class="mb-4 bg-gradient-to-br from-accent bg-clip-text p-4 text-8xl font-bold text-transparent"
+	>
+		mony
+	</h1>
 
 	<form
-		class="flex space-x-2"
+		class="flex flex-col space-x-2"
 		onsubmit={(e) => {
 			e.preventDefault();
 			const formData = new FormData(e.currentTarget);
@@ -30,9 +34,12 @@
 			autocomplete="off"
 			required
 			name="name"
-			class="button layer"
+			class="button border-2 border-layer bg-layer/50 shadow-inner transition-all focus:!border-accent/50 focus:outline-none"
 		/>
-		<button type="submit" class="button accent">
+		<button
+			type="submit"
+			class="button mx-auto accent transition-transform hover:scale-110 active:scale-90"
+		>
 			<LucideChevronRight />
 		</button>
 	</form>

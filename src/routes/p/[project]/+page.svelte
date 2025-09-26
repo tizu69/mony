@@ -29,7 +29,7 @@
 </svelte:head>
 
 <main>
-	<div class="flex items-center justify-center p-4">
+	<div class="flex items-center justify-center p-4 pt-0">
 		<Number value={store.getFunds(project)} />
 	</div>
 
