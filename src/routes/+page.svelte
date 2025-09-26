@@ -4,6 +4,10 @@
 	import { LucideChevronRight } from 'lucide-svelte';
 </script>
 
+<svelte:head>
+	<title>mony</title>
+</svelte:head>
+
 <main class="flex min-h-[80dvh] flex-col items-center justify-center p-4">
 	<h1 class="mb-4 text-4xl font-bold">mony</h1>
 

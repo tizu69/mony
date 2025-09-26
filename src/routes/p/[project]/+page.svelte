@@ -25,7 +25,7 @@
 </script>
 
 <svelte:head>
-	<title>mony</title>
+	<title>{project.name} &bull; mony</title>
 </svelte:head>
 
 <main>
