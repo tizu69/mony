@@ -44,6 +44,7 @@
 		<input
 			{autofocus}
 			type="number"
+			pattern="\d*"
 			class="peer absolute inset-0 h-full w-full opacity-0"
 			onkeypress={(e) => e.preventDefault()}
 			onkeydown={(e) => {
