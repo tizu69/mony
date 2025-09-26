@@ -24,7 +24,7 @@
 		</select>
 	</div>
 	<div class="flex items-end rounded layer p-2 pb-1">
-		<Number small value={Number.isNaN(daysLeft) ? Infinity : daysLeft} type="number" />
+		<Number small value={daysLeft !== daysLeft ? Infinity : daysLeft} type="number" />
 		<p class="pb-1">days</p>
 	</div>
 </div>
