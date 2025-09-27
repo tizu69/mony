@@ -58,7 +58,7 @@
 			<div class="mb-1 border-b-2 border-dotted"></div>
 			<select
 				bind:value={store.current.currency}
-				class="link-select"
+				class="link-select text-end"
 				onchange={() => (showCurrencyChangeWarning = true)}
 			>
 				{#each Intl.supportedValuesOf('currency') as opt}
@@ -86,10 +86,18 @@
 		<div class="grid grid-cols-[auto_1fr_auto] space-x-2">
 			<p>Locale</p>
 			<div class="mb-1 border-b-2 border-dotted"></div>
-			<select bind:value={store.current.locale} class="link-select">
+			<select bind:value={store.current.locale} class="link-select text-end">
 				{#each ISO639.getAllCodes() as opt}
 					<option value={opt}>{opt}</option>
 				{/each}
+			</select>
+		</div>
+		<div class="grid grid-cols-[auto_1fr_auto] space-x-2">
+			<p>Modals</p>
+			<div class="mb-1 border-b-2 border-dotted"></div>
+			<select bind:value={store.current.fullscreenModal} class="link-select text-end">
+				<option value={false}>Normal</option>
+				<option value={true}>Compat</option>
 			</select>
 		</div>
 	</div>

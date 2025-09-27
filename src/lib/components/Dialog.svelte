@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { store } from '$lib/monystore';
 	import { interpolate } from '$lib/utils';
 	import { LucideX } from 'lucide-svelte';
 	import { tick, type Snippet } from 'svelte';
@@ -71,8 +72,9 @@
 		<div
 			class={[
 				'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl border-t',
-				'max-h-[90dvh] border-layer bg-layer/50 py-4 text-text shadow-2xl backdrop-blur-2xl',
+				'border-layer bg-layer/50 py-4 text-text shadow-2xl backdrop-blur-2xl',
 				'overflow-x-clip overflow-y-auto lg:bg-layer/75',
+				store.current.fullscreenModal ? 'max-h-dvh min-h-dvh' : 'max-h-[90dvh]',
 				className
 			]}
 			style="transform: translateY({translateY}%);

@@ -9,7 +9,7 @@ export const defaultStore = {
 
 	locale: 'de',
 	currency: 'EUR',
-	currency: 'EUR'
+	fullscreenModal: false
 };
 
 export type Store = typeof defaultStore;
