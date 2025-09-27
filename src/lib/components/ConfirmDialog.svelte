@@ -33,8 +33,8 @@
 
 <Dialog class="px-4" bind:open trigger={p.children} triggerClass={p.class}>
 	<p.icon class="mx-auto mt-2 size-10" />
-	<h2 class="mt-6 text-center text-2xl font-bold">{p.title}</h2>
-	<p class="mt-2 text-center text-sm text-subtext">{p.text}</p>
+	<h2 class="mt-6 text-center text-2xl font-bold text-pretty">{p.title}</h2>
+	<p class="mt-2 text-center text-sm text-pretty text-subtext">{p.text}</p>
 	<button
 		disabled={!!buttonSecs}
 		class={[
