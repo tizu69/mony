@@ -54,10 +54,8 @@
 			type="number"
 			pattern="\d*"
 			class="peer absolute inset-0 h-full w-full opacity-0"
-			onkeypress={(e) => e.preventDefault()}
+			oninput={(e) => (e.currentTarget.value = '')}
 			onkeydown={(e) => {
-				e.preventDefault();
-
 				if (e.key === 'Backspace' || e.key === 'Delete') {
 					// remove last digit
 					value = Math.floor(value / 10);
@@ -70,11 +68,12 @@
 					value = Math.min(Math.max(value, 0), !currencySupportsDecimal ? maximum * 1000 : maximum);
 				}
 			}}
-			onfocus={(e) => {
-				const t = e.currentTarget;
-				setTimeout(() => {
-					t.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-				}, 50);
+			onpaste={(e) => {
+				e.preventDefault();
+				const text = e.clipboardData!.getData('Text');
+				if (!text) return;
+				value = parseInt(text.replaceAll(/[^0-9]/g, ''));
+				value = Math.min(Math.max(value, 0), !currencySupportsDecimal ? maximum * 1000 : maximum);
 			}}
 		/>
 	{/if}
