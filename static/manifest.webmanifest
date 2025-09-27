@@ -4,8 +4,8 @@
     "short_name": "mony",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#202020",
-    "theme_color": "#202020",
+    "background_color": "#1a202c",
+    "theme_color": "#1a202c",
     "icons": [
 			{
 				"purpose": "maskable",
