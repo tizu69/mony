@@ -29,6 +29,14 @@
 	$effect(() => {
 		displayedValue = type !== 'currency' ? value : value / 100;
 	});
+
+	let currencySupportsDecimal = $derived.by(() => {
+		const formatter = new Intl.NumberFormat(store.current.locale, {
+			style: 'currency',
+			currency: store.current.currency
+		});
+		return formatter.format(0.12).includes('12');
+	});
 </script>
 
 <div class="relative rounded-lg transition-colors peer-focus-within:bg-layer/50">
@@ -49,14 +57,17 @@
 			onkeypress={(e) => e.preventDefault()}
 			onkeydown={(e) => {
 				e.preventDefault();
+
 				if (e.key === 'Backspace' || e.key === 'Delete') {
 					// remove last digit
 					value = Math.floor(value / 10);
+					if (!currencySupportsDecimal && value < 100) value = 0;
 				} else if (e.key >= '0' && e.key <= '9') {
 					// add new digit
-					let next = value * 10 + parseInt(e.key);
-					next = Math.min(Math.max(next, 0), maximum);
-					value = next;
+					if (!currencySupportsDecimal) value = Math.floor(value / 100);
+					value = value * 10 + parseInt(e.key);
+					if (!currencySupportsDecimal) value = value * 100;
+					value = Math.min(Math.max(value, 0), !currencySupportsDecimal ? maximum * 1000 : maximum);
 				}
 			}}
 			onfocus={(e) => {
@@ -67,4 +78,5 @@
 			}}
 		/>
 	{/if}
+	{value}
 </div>
