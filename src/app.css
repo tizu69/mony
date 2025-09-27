@@ -33,6 +33,9 @@ main {
 @utility layer {
 	@apply bg-layer;
 }
+@utility iconized-button {
+	@apply flex flex-col items-center gap-2 button layer pt-3 text-xs;
+}
 
 @utility input {
 	@apply w-full button border-2 border-layer bg-layer/50 shadow-inner;

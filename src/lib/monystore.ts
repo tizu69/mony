@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { persistedState } from 'svelte-persisted-state';
-import type { Project, Trans } from './types';
+import type { Project, Trans, TransItem } from './types';
 import { sum } from './utils';
 
 export const defaultStore = {
@@ -8,6 +8,7 @@ export const defaultStore = {
 	trans: [] as Trans[],
 
 	locale: 'de',
+	currency: 'EUR',
 	currency: 'EUR'
 };
 
@@ -29,7 +30,14 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	canDeleteTrans: (trans: Trans) => boolean;
 	getFundsUsedInTime: (project: Project, hours: number) => number;
 };
-store.current = { ...defaultStore, ...store.current };
+
+function migrations() {
+	store.current = { ...defaultStore, ...store.current };
+	store.current.trans = store.current.trans.map((t) =>
+		t.items === undefined ? { ...t, items: [] } : t
+	);
+}
+migrations();
 
 store.getProjects = () =>
 	store.current.projects.toSorted((a, b) => {
@@ -54,7 +62,8 @@ store.addTrans = (project: Project, cents: number, reason: string) =>
 		amount: cents,
 		reason,
 		date: new Date().getTime(),
-		id: nanoid()
+		id: nanoid(),
+		items: []
 	});
 store.deleteTrans = (trans: Trans) => {
 	store.current.trans = store.current.trans.filter((t) => t.id !== trans.id);

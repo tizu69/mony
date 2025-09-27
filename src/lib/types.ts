@@ -6,7 +6,17 @@ export interface Project {
 export interface Trans {
 	project: string;
 	id: string;
-	date: number; // unix timestamp
-	amount: number; // in cents
+	/** unix timestamp */
+	date: number;
+	/** in cents, negative if expense */
+	amount: number;
 	reason: string;
+	items: TransItem[];
+}
+
+export interface TransItem {
+	/** In cents, always positive. All items' amounts add up to |trans.amount|.
+	 * Check if trans.amount < 0 to determine if it's an expense. */
+	amount: number;
+	name: string;
 }

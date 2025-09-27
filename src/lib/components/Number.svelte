@@ -8,7 +8,8 @@
 		maximum = 1_000_000_00,
 		small = false,
 		autofocus,
-		type = 'currency'
+		type = 'currency',
+		suffix = ''
 	}: {
 		value: number;
 		writeable?: boolean;
@@ -16,6 +17,7 @@
 		small?: boolean;
 		autofocus?: boolean;
 		type?: 'currency' | 'number';
+		suffix?: string;
 	} = $props();
 
 	let format = $derived.by(() => {
@@ -46,6 +48,7 @@
 		{format}
 		value={displayedValue}
 		trend={(oldValue: number, value: number) => Math.sign(Math.abs(value) - Math.abs(oldValue))}
+		{suffix}
 	/>
 	{#if writeable}
 		<!-- svelte-ignore a11y_autofocus -->
