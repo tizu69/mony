@@ -4,6 +4,7 @@
 	import { store } from '$lib/monystore';
 	import ISO639 from 'iso-639-1';
 	import { LucideBadgeDollarSign, LucideChevronRight } from 'lucide-svelte';
+	import StatGuesser from './StatGuesser.svelte';
 
 	let showCurrencyChangeWarning = $state(false);
 </script>
@@ -13,7 +14,7 @@
 </svelte:head>
 
 <main>
-	<div class="mb-[10dvh] flex h-[60dvh] flex-col items-center justify-center p-4">
+	<div class="mb-[10vh] flex min-h-[30vh] flex-col items-center justify-center p-4">
 		<h1
 			class="mb-4 bg-gradient-to-br from-accent bg-clip-text p-4 text-8xl font-bold text-transparent"
 		>
@@ -50,7 +51,7 @@
 		</form>
 	</div>
 
-	<hr />
+	<StatGuesser />
 
 	<div class="space-y-4 p-4">
 		<div class="grid grid-cols-[auto_1fr_auto] space-x-2">

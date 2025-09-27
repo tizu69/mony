@@ -26,7 +26,7 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	getTrans: (project: Project) => Trans[];
 	addTrans: (project: Project, cents: number, reason: string) => void;
 	deleteTrans: (trans: Trans) => void;
-	getFunds: (project: Project) => number;
+	getFunds: (project: Project, type?: '-' | '+') => number;
 	canDeleteTrans: (trans: Trans) => boolean;
 	getFundsUsedInTime: (project: Project, hours: number) => number;
 };
@@ -72,7 +72,11 @@ store.addTrans = (project: Project, cents: number, reason: string) =>
 store.deleteTrans = (trans: Trans) => {
 	store.current.trans = store.current.trans.filter((t) => t.id !== trans.id);
 };
-store.getFunds = (project: Project) => sum(store.getTrans(project));
+store.getFunds = (project: Project, type?: '-' | '+') =>
+	sum(
+		store.getTrans(project),
+		(t) => !type || (t.amount < 0 && type === '-') || (t.amount > 0 && type === '+')
+	);
 store.canDeleteTrans = (trans: Trans) => {
 	const transForProject = store
 		.getTrans(store.getProject(trans.project)!)

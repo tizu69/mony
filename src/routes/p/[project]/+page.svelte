@@ -48,8 +48,10 @@
 
 	<ConfirmDialog
 		icon={LucideWallet}
-		title="Delete {project.name}? 🥺"
-		text="This cannot be undone. All the funds & expenses you added will be gone. Are you sure?"
+		title="You shouldn't delete projects."
+		text={'All the funds & expenses you tracked will be deleted. As such,' +
+			' your global stats will not be accurate anymore. You really' +
+			" shouldn't do this unless you have a good reason. Are you sure?"}
 		button="Delete"
 		waitFor={10}
 		onconfirm={() => {

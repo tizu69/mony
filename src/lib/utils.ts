@@ -1,8 +1,11 @@
-export function sum<K extends keyof T, T extends Record<K, number>>(
+export function sum<T extends { amount: number }>(
 	array: T[],
-	key: K = 'amount' as K
+	cond: (key: T) => boolean = () => true
 ): number {
-	return array.reduce((total, item) => total + item[key], 0);
+	return array.reduce((total, item) => {
+		if (!cond(item)) return total;
+		return total + item.amount;
+	}, 0);
 }
 
 export const interpolate = (v: number, rin: [number, number], rout: [number, number]) =>
