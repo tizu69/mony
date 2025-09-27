@@ -43,7 +43,11 @@ store.getProjects = () =>
 	store.current.projects.toSorted((a, b) => {
 		const aTrans = store.getTrans(a).at(-1);
 		const bTrans = store.getTrans(b).at(-1);
-		if (!aTrans || !bTrans) return 0;
+		if (!aTrans && !bTrans) return 0;
+		// projects without transactions should be at the start
+		if (!aTrans) return -1;
+		// .. so that they're easier to notice & fill out or remove
+		if (!bTrans) return 1;
 		return bTrans.date - aTrans.date;
 	});
 store.getProject = (id) => store.current.projects.find((p) => p.id === id);
