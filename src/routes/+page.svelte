@@ -69,8 +69,17 @@
 			<ConfirmDialog
 				bind:open={showCurrencyChangeWarning}
 				icon={LucideBadgeDollarSign}
-				title="Currency changes in mony"
-				text="Changing the currency will not convert existing transactions. In mony, one Euro is worth one US Dollar, and one US Dollar is worth one British Pound. If you travel often as part of a single project, you might want to convert transactions before inserting them into mony. Note that this may also be wrong, based on how the exchange rates change over time."
+				title="Currency is experimental"
+				text={'Changing the currency will not convert existing' +
+					' transactions. In mony, one Euro is worth one US Dollar,' +
+					' and one US Dollar is worth one British Pound. If you' +
+					' travel often as part of a single project, you might want' +
+					' to convert transactions before inserting them into mony.' +
+					' Note that this may also be wrong, based on how the' +
+					' exchange rates change over time. Mony also only really' +
+					' works as intended for EUR-like currencies: The low on' +
+					' funds warning will trigger at 20 <currency>, which may' +
+					' be too low or too high for other currencies.'}
 				button="Got it!"
 			/>
 		</div>
