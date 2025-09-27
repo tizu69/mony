@@ -69,19 +69,20 @@
 	>
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
-			            class={[
-							'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl border-t',
-							'max-h-[90dvh] border-layer bg-layer/50 py-4 text-text shadow-2xl backdrop-blur-2xl',
-							'overflow-x-clip overflow-y-auto lg:bg-layer/75',
-							className
-						]}			style="transform: translateY({translateY}%);
+			class={[
+				'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl border-t',
+				'max-h-[90dvh] border-layer bg-layer/50 py-4 text-text shadow-2xl backdrop-blur-2xl',
+				'overflow-x-clip overflow-y-auto lg:bg-layer/75',
+				className
+			]}
+			style="transform: translateY({translateY}%);
             transform-origin: bottom center;
             scale: {scale}%;"
 			onclick={(e) => e.stopPropagation()}
 			bind:this={dialogDiv}
 		>
 			{#if dismissible}
-				<button class="button layer sm absolute top-2 right-2 !p-1" onclick={() => (open = false)}>
+				<button class="sm absolute top-2 right-2 button layer !p-1" onclick={() => (open = false)}>
 					<LucideX class="size-4" />
 				</button>
 			{/if}

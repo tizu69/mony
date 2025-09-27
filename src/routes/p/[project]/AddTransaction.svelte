@@ -77,7 +77,7 @@
 	{/if}
 
 	<button
-		class="button w-full transition-transform not-disabled:accent not-disabled:hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+		class="w-full button transition-transform not-disabled:accent not-disabled:hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
 		disabled={!reason || !amount}
 		onclick={() => {
 			if (!confirmData) createTrans();

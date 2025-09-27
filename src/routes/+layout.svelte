@@ -1,7 +1,7 @@
 <script lang="ts">
-	import '../app.css';
-	import { store } from '$lib/monystore';
 	import { page } from '$app/state';
+	import { store } from '$lib/monystore';
+	import '../app.css';
 
 	let { children } = $props();
 </script>

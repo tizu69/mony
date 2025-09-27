@@ -1,7 +1,7 @@
-import { persistedState } from 'svelte-persisted-state';
-import type { Trans, Project } from './types';
-import { sum } from './utils';
 import { nanoid } from 'nanoid';
+import { persistedState } from 'svelte-persisted-state';
+import type { Project, Trans } from './types';
+import { sum } from './utils';
 
 export const defaultStore = {
 	projects: [] as Project[],
