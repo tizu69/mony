@@ -31,7 +31,12 @@
 		</div>
 		<div class="flex flex-col rounded-lg bg-layer p-4">
 			<p class="text-sm text-subtext">Saved</p>
-			<Number small value={Math.round(savingRate)} type="number" suffix="%" />
+			<Number
+				small
+				value={Math.round(savingRate !== savingRate ? 0 : savingRate)}
+				type="number"
+				suffix="%"
+			/>
 		</div>
 	</div>
 	<div class="grid grid-cols-2 space-x-4">
