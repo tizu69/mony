@@ -27,7 +27,7 @@
 				e.preventDefault();
 				const formData = new FormData(e.currentTarget);
 
-				const name = formData.get('name')?.toString().trim();
+				const name = formData.get('name')?.toString();
 				if (!name) return;
 
 				const project = store.addProject(name);
@@ -41,6 +41,7 @@
 				required
 				name="name"
 				class="input"
+				onchange={(e) => (e.currentTarget.value = e.currentTarget.value.trim())}
 			/>
 			<button
 				type="submit"

@@ -71,6 +71,7 @@
 		<input
 			type="text"
 			bind:value={reason}
+			onchange={() => (reason = reason.trim())}
 			class="input"
 			placeholder={isExpense ? 'What are you buying?' : 'Why are you adding funds?'}
 		/>

@@ -55,6 +55,7 @@
 						placeholder="Item name / description"
 						type="text"
 						bind:value={item.name}
+						onchange={() => (item.name = item.name.trim())}
 						class={['input', item.amount === 0 && 'opacity-50 not-placeholder-shown:line-through']}
 					/>
 				</div>
