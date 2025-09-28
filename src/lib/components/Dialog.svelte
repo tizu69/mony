@@ -80,8 +80,8 @@
 				className
 			]}
 			style="transform: translateY({translateY}%);
-            transform-origin: bottom center;
-            scale: {scale}%;"
+                transform-origin: bottom center;
+                scale: {scale}%;"
 			onclick={(e) => e.stopPropagation()}
 			bind:this={dialogDiv}
 		>
