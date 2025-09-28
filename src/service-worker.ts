@@ -29,6 +29,9 @@ sw.addEventListener('activate', (event) => {
 	async function deleteOldCaches() {
 		for (const key of await caches.keys()) if (key !== CACHE) await caches.delete(key);
 		await sw.clients.claim();
+		sw.clients.matchAll().then((clients) => {
+			clients.forEach((client) => client.postMessage({ type: 'install' }));
+		});
 	}
 	event.waitUntil(deleteOldCaches());
 });

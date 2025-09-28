@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import ReadyForOfflineDialog from '$lib/components/ReadyForOfflineDialog.svelte';
 	import { store } from '$lib/monystore';
 	import '../app.css';
 
@@ -35,4 +36,5 @@
 	{/each}
 </header>
 
+<ReadyForOfflineDialog />
 {@render children?.()}
