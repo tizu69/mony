@@ -54,7 +54,7 @@
 						placeholder="Item name / description"
 						type="text"
 						bind:value={item.name}
-						class={['input', item.amount === 0 && 'line-through opacity-50']}
+						class={['input', item.amount === 0 && 'opacity-50 not-placeholder-shown:line-through']}
 					/>
 				</div>
 			{/each}
