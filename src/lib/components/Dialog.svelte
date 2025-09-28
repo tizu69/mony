@@ -48,7 +48,9 @@
 
 	let translateY = $derived(interpolate(y.current, [0, 1], [0, 100]));
 	let scale = $derived(interpolate(y.current, [0, 1], [100, 90]));
-	let backdropOpacity = $derived(interpolate(y.current, [1, 0], [0, 0.5]));
+	let backdropOpacity = $derived(
+		store.current.fullscreenModal ? 0 : interpolate(y.current, [1, 0], [0, 0.5])
+	);
 </script>
 
 {#if trigger}
@@ -74,7 +76,7 @@
 				'fixed inset-x-0 bottom-0 mx-auto max-w-2xl rounded-t-xl border-t',
 				'border-layer bg-layer/50 py-4 text-text shadow-2xl backdrop-blur-2xl',
 				'overflow-x-clip overflow-y-auto lg:bg-layer/75',
-				store.current.fullscreenModal ? 'max-h-dvh min-h-dvh' : 'max-h-[90dvh]',
+				store.current.fullscreenModal ? 'max-h-[99dvh] min-h-[99dvh]' : 'max-h-[90dvh]',
 				className
 			]}
 			style="transform: translateY({translateY}%);
