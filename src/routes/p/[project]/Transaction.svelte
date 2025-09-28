@@ -7,6 +7,7 @@
 	import { sum } from '$lib/utils';
 	import { LucidePlus, LucideTrash2 } from 'lucide-svelte';
 	import { untrack } from 'svelte';
+	import { slide } from 'svelte/transition';
 
 	let { trans, dtf }: { trans: Trans; dtf: Intl.DateTimeFormat } = $props();
 
@@ -47,8 +48,8 @@
 		{@const rest = Math.abs(trans.amount) - sum(trans.items)}
 		{@const restP = Math.abs(rest / trans.amount) * 100}
 		<div class="flex flex-col gap-2">
-			{#each trans.items as item, i}
-				<div class="grid grid-cols-[auto_1fr] items-center">
+			{#each trans.items as item}
+				<div class="grid grid-cols-[auto_1fr] items-center" transition:slide|global>
 					<Number small bind:value={item.amount} writeable />
 					<input
 						placeholder="Item name / description"
@@ -59,7 +60,7 @@
 				</div>
 			{/each}
 			{#if rest !== 0}
-				<div class="grid grid-cols-[auto_1fr] items-center">
+				<div class="grid grid-cols-[auto_1fr] items-center" transition:slide|global>
 					<Number small value={rest} />
 					<p>{rest > 0 ? 'Taxes' : 'Overpayment'} ({Math.round(restP)}%)</p>
 				</div>
