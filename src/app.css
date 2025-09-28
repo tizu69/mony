@@ -6,7 +6,7 @@
 	--color-layer: #2d3748;
 	--color-accent: #4fd1c5;
 	--color-text: #f7fafc;
-	--color-subtext: #e2e8f0;
+	--color-subtext: #cfd0d2;
 }
 
 :root {
@@ -38,8 +38,9 @@ main {
 }
 
 @utility input {
-	@apply w-full button border-2 border-layer bg-layer/50 shadow-inner;
-	@apply transition-all focus:!border-accent/50 focus:outline-none;
+	@apply w-full button border-2 !border-accent/10 bg-layer shadow-inner;
+	@apply transition-all focus:!border-accent focus:outline-none;
+	@apply placeholder:text-subtext;
 }
 @utility link-select {
 	@apply appearance-none bg-transparent text-accent underline focus:outline-none;
