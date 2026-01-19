@@ -1,4 +1,4 @@
-const MIN_FUNDS_THRESHOLD = 20_00;
+const MIN_FUNDS_THRESHOLD = 7_00;
 const wait = {
 	block: -1,
 	warning: 2,

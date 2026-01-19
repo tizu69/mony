@@ -15,14 +15,12 @@
 
 <main>
 	<div class="mb-[10vh] flex min-h-[30vh] flex-col items-center justify-center p-4">
-		<h1
-			class="mb-4 bg-gradient-to-br from-accent bg-clip-text p-4 text-8xl font-bold text-transparent"
-		>
+		<h1 class="mb-4 bg-radial from-hover-text bg-clip-text p-4 text-8xl font-bold text-transparent">
 			mony
 		</h1>
 
 		<form
-			class="flex flex-col space-x-2"
+			class="grid grid-cols-[auto_1fr] gap-2"
 			onsubmit={(e) => {
 				e.preventDefault();
 				const formData = new FormData(e.currentTarget);
@@ -40,14 +38,11 @@
 				autocomplete="off"
 				required
 				name="name"
-				class="input"
+				class="w-full input"
 				onchange={(e) => (e.currentTarget.value = e.currentTarget.value.trim())}
 			/>
-			<button
-				type="submit"
-				class="mx-auto mt-2 button accent transition-transform hover:scale-110 active:scale-90"
-			>
-				<LucideChevronRight />
+			<button type="submit" class="primary">
+				<LucideChevronRight class="w-6 min-w-6" />
 			</button>
 		</form>
 	</div>
@@ -55,13 +50,13 @@
 	<StatGuesser />
 
 	<div class="space-y-4 p-4">
-		<div class="grid grid-cols-[auto_1fr_auto] space-x-2">
+		<div class="grid grid-cols-[auto_1fr_auto] items-center space-x-2">
 			<p>Currency</p>
-			<div class="mb-1 border-b-2 border-dotted"></div>
+			<div class="border-b-2 border-dotted"></div>
 			<select
 				bind:value={store.current.currency}
-				class="link-select text-end"
 				onchange={() => (showCurrencyChangeWarning = true)}
+				class="input"
 			>
 				{#each Intl.supportedValuesOf('currency') as opt}
 					<option value={opt}>{opt}</option>
@@ -80,26 +75,26 @@
 					' Note that this may also be wrong, based on how the' +
 					' exchange rates change over time. Mony also only really' +
 					' works as intended for EUR-like currencies: The low on' +
-					' funds warning will trigger at 20 <currency>, which may' +
+					' funds warning will trigger at 7 <currency>, which may' +
 					' be too low or too high for other currencies.'}
 				button="Got it!"
 			/>
 		</div>
-		<div class="grid grid-cols-[auto_1fr_auto] space-x-2">
+		<div class="grid grid-cols-[auto_1fr_auto] items-center space-x-2">
 			<p>Locale</p>
-			<div class="mb-1 border-b-2 border-dotted"></div>
-			<select bind:value={store.current.locale} class="link-select text-end">
+			<div class="border-b-2 border-dotted"></div>
+			<select bind:value={store.current.locale} class="input">
 				{#each ISO639.getAllCodes() as opt}
 					<option value={opt}>{opt}</option>
 				{/each}
 			</select>
 		</div>
-		<div class="grid grid-cols-[auto_1fr_auto] space-x-2">
+		<div class="grid grid-cols-[auto_1fr_auto] items-center space-x-2">
 			<p>Modals</p>
-			<div class="mb-1 border-b-2 border-dotted"></div>
-			<select bind:value={store.current.fullscreenModal} class="link-select text-end">
+			<div class="border-b-2 border-dotted"></div>
+			<select bind:value={store.current.fullscreenModal} class="input">
 				<option value={false}>Normal</option>
-				<option value={true}>Compat</option>
+				<option value={true}>Compatibility</option>
 			</select>
 		</div>
 	</div>

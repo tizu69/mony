@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { store } from '$lib/monystore';
 	import NumberFlow from '@number-flow/svelte';
+	import { tick } from 'svelte';
 
 	let {
 		value = $bindable(),
@@ -25,8 +26,6 @@
 		if (type === 'number') return { style: 'decimal' };
 	});
 
-	// this weird setup essentially ensures that the number animates on first
-	// render as well
 	let displayedValue = $state(0);
 	$effect(() => {
 		displayedValue = type !== 'currency' ? value : value / 100;
@@ -41,7 +40,7 @@
 	});
 </script>
 
-<div class="relative rounded-lg transition-colors peer-focus-within:bg-layer/50">
+<div class="peer-focus-within:bg-layer/50 relative rounded-lg transition-colors">
 	<NumberFlow
 		class={['px-2 font-bold tabular-nums', !small ? 'text-5xl' : 'text-2xl'].join(' ')}
 		locales={store.current.locale}

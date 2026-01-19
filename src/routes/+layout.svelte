@@ -11,26 +11,15 @@
 	<link rel="icon" href="/pwa_icon.png" />
 </svelte:head>
 
-<header
-	class="sticky top-0 z-10 flex space-x-2 overflow-x-scroll bg-background/80 p-4 backdrop-blur-sm"
->
+<header class="sticky top-0 z-10 flex w-full overflow-x-scroll border-b bg-back1 px-4">
 	{#snippet card(text: string, href: string)}
 		{@const current = page.url.pathname === new URL(href, page.url).pathname}
-		<a
-			{href}
-			class={[
-				'rounded-full px-3 py-1 text-nowrap transition-colors',
-				current ? 'bg-accent text-background' : 'bg-layer hover:bg-layer/50'
-			]}
-		>
-			{text}
+		<a {href} class={['group block px-1 py-2', current && 'border-b-2 border-text']}>
+			<span class="rounded px-2 py-1.5 group-hover:bg-hover-back">{text}</span>
 		</a>
 	{/snippet}
 
-	<a href="/">
-		<img src="/pwa_icon.png" alt="mony" class="size-8 min-w-8 rounded-lg" />
-	</a>
-	{@render card('+', `/`)}
+	{@render card('mony', `/`)}
 	{#each store.getProjects() as project}
 		{@render card(project.name, `/p/${project.id}`)}
 	{/each}

@@ -41,25 +41,23 @@
 	triggerClass={p.class}
 	bind:open
 	trigger={p.children}
-	class="space-y-2 px-4"
+	class="space-y-2"
 	onclose={() => reset()}
 >
 	{#if !isFirstTrans}
-		<div class="mr-6 flex rounded-full bg-layer p-1">
+		<div class="mr-10 grid grid-cols-2">
 			<button
-				class={[
-					'w-full rounded-full py-2 text-center transition-colors',
-					isExpense ? 'bg-accent text-background' : 'hover:bg-layer'
-				]}
-				onclick={() => (isExpense = true)}>Expense</button
+				class={[isExpense ? 'primary rounded-full' : 'secondary']}
+				onclick={() => (isExpense = true)}
 			>
+				Expense
+			</button>
 			<button
-				class={[
-					'w-full rounded-full py-2 text-center transition-colors',
-					!isExpense ? 'bg-accent text-background' : 'hover:bg-layer'
-				]}
-				onclick={() => (isExpense = false)}>Add funds</button
+				class={[!isExpense ? 'primary rounded-full' : 'secondary']}
+				onclick={() => (isExpense = false)}
 			>
+				Add funds
+			</button>
 		</div>
 	{/if}
 
@@ -72,13 +70,13 @@
 			type="text"
 			bind:value={reason}
 			onchange={() => (reason = reason.trim())}
-			class="input"
+			class="w-full input"
 			placeholder={isExpense ? 'What are you buying?' : 'Why are you adding funds?'}
 		/>
 	{/if}
 
 	<button
-		class="w-full button transition-transform not-disabled:accent not-disabled:hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+		class="w-full primary"
 		disabled={!reason || !amount}
 		onclick={() => {
 			if (!confirmData) createTrans();

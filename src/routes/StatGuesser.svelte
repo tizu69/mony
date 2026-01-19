@@ -12,43 +12,23 @@
 </script>
 
 {#if totalPurch > 0}
-	<div class="space-y-4 px-4">
-		<div>
-			<div class="flex flex-col rounded-lg bg-layer p-4">
-				<p class="text-sm text-subtext">Total added</p>
-				<Number small value={totalIn} />
-			</div>
+	{#snippet entry(text: string, num: number, kind: 'currency' | 'number' = 'currency')}
+		<div class="flex items-baseline">
+			<Number small value={num} type={kind} />
+			<span class="text-sm text-subtext">{text}</span>
 		</div>
-		<div>
-			<div class="flex flex-col rounded-lg bg-layer p-4">
-				<p class="text-sm text-subtext">Total spent</p>
-				<Number small value={-totalOut} />
-			</div>
+	{/snippet}
+
+	<div class="divide-y divide-border card *:not-first:pt-3 *:not-last:pb-3">
+		{@render entry('added', totalIn)}
+		{@render entry('spent', -totalOut)}
+		<div class="grid grid-cols-[1fr_auto] space-x-4 divide-x divide-border">
+			{@render entry('left over', totalAvail)}
+			{@render entry('saved', Math.round(savingRate !== savingRate ? 0 : savingRate))}
 		</div>
-		<div class="grid grid-cols-[1fr_auto] space-x-4">
-			<div class="flex flex-col rounded-lg bg-layer p-4">
-				<p class="text-sm text-subtext">Left over</p>
-				<Number small value={totalAvail} />
-			</div>
-			<div class="flex flex-col rounded-lg bg-layer p-4">
-				<p class="text-sm text-subtext">Saved</p>
-				<Number
-					small
-					value={Math.round(savingRate !== savingRate ? 0 : savingRate)}
-					type="number"
-					suffix="%"
-				/>
-			</div>
-		</div>
-		<div class="grid grid-cols-2 space-x-4">
-			<div class="flex flex-col rounded-lg bg-layer p-4">
-				<p class="text-sm text-subtext">Purchases</p>
-				<Number small value={totalPurch} type="number" />
-			</div>
-			<div class="flex flex-col rounded-lg bg-layer p-4">
-				<p class="text-sm text-subtext">Projects</p>
-				<Number small value={totalProj} type="number" />
-			</div>
+		<div class="grid grid-cols-2 space-x-4 divide-x divide-border">
+			{@render entry('purchases', totalPurch, 'number')}
+			{@render entry('projects', totalProj, 'number')}
 		</div>
 	</div>
 {/if}

@@ -42,7 +42,7 @@
 			</div>
 		{/each}
 	</div>
-	<AddTransaction class="fixed right-6 bottom-6 z-10 button !rounded-2xl accent !py-4" {project}>
+	<AddTransaction class="fixed right-6 bottom-6 z-10 primary p-4" {project}>
 		<LucidePlus />
 	</AddTransaction>
 

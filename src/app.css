@@ -2,46 +2,83 @@
 
 @theme {
 	--color-*: initial;
-	--color-background: #1a202c;
-	--color-layer: #2d3748;
-	--color-accent: #4fd1c5;
-	--color-text: #f7fafc;
-	--color-subtext: #cfd0d2;
+	--color-back0: #0f0a05;
+	--color-back1: #1a1410;
+	--color-hover-back: #2d241a;
+	--color-border: #4a3f33;
+	--color-hover-border: #ff8c42;
+	--color-text: #f5ede5;
+	--color-subtext: #a8927c;
+	--color-hover-text: #ffb366;
+	--color-danger: #ff6b4a;
+	--color-danger-back: #5e2015;
+	--color-backdrop: #0f0a05aa;
+}
+@media (prefers-color-scheme: light) {
+	:root {
+		--color-back0: #faf6f1;
+		--color-back1: #fff9f5;
+		--color-hover-back: #f5ede5;
+		--color-border: #e0d0c0;
+		--color-hover-border: #ff8c42;
+		--color-text: #2b1f15;
+		--color-hover-text: #d97a3a;
+		--color-danger: #d95c3d;
+		--color-danger-back: #ffd4c4;
+		--color-backdrop: #faf6f1aa;
+	}
 }
 
 :root {
-	color-scheme: dark;
-	font-size: 18px;
-	@apply bg-background text-text;
-
-	-webkit-tap-highlight-color: transparent;
+	@apply m-0 bg-back0 p-0 text-text;
 }
-* {
-	@apply border-layer;
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		@apply border-border;
+	}
+	:focus-visible {
+		@apply outline-0;
+	}
+}
+
+@custom-variant hover {
+	&:not(:disabled):hover,
+	&:not(:disabled):focus-visible {
+		@slot;
+	}
+}
+
+button {
+	cursor: pointer;
+}
+
+@utility card {
+	@apply rounded-3xl border p-4;
+}
+@utility input {
+	@apply card rounded-md bg-back1 px-3 py-2;
+	@apply hover:border-hover-border disabled:opacity-50;
+}
+@utility primary {
+	@apply card rounded-md border-text bg-text px-3 py-2 text-back0;
+	@apply hover:bg-hover-text disabled:opacity-50;
+}
+@utility secondary {
+	@apply card rounded-md bg-back1 px-3 py-2 text-text;
+	@apply hover:bg-hover-back hover:text-hover-text disabled:opacity-50;
+}
+@utility danger {
+	@apply secondary border-danger-back bg-danger-back;
+	@apply hover:border-danger hover:bg-danger-back disabled:opacity-50;
+}
+@utility square {
+	@apply px-2;
 }
 
 main {
 	@apply mx-auto flex max-w-(--breakpoint-md) flex-col p-4;
-}
-
-@utility button {
-	@apply rounded px-4 py-2;
-}
-@utility accent {
-	@apply bg-accent text-background;
-}
-@utility layer {
-	@apply bg-layer;
-}
-@utility iconized-button {
-	@apply flex flex-col items-center gap-2 button layer pt-3 text-xs;
-}
-
-@utility input {
-	@apply w-full button border-2 !border-accent/10 bg-layer shadow-inner;
-	@apply transition-all focus:!border-accent focus:outline-none;
-	@apply placeholder:text-subtext;
-}
-@utility link-select {
-	@apply appearance-none bg-transparent text-accent underline focus:outline-none;
 }

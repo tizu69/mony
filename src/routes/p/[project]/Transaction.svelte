@@ -23,7 +23,7 @@
 </script>
 
 <button
-	class="flex w-full items-center justify-between rounded-lg bg-layer p-4 text-left transition-colors hover:bg-layer/50"
+	class="flex w-full items-center justify-between card text-left"
 	onclick={() => (open = !open)}
 >
 	<div>
@@ -35,13 +35,11 @@
 	</div>
 </button>
 
-<Dialog bind:open class="flex flex-col gap-4 px-4">
+<Dialog bind:open class="flex flex-col gap-4">
 	<div class="flex flex-col items-center gap-2">
 		<Number value={trans.amount} />
 		<p class="text-center text-2xl font-bold">{trans.reason}</p>
-		<p class="text-sm text-subtext">
-			{dtf.format(trans.date)}
-		</p>
+		<p class="text-sm text-subtext">{dtf.format(trans.date)}</p>
 	</div>
 
 	{#if trans.items.length !== 0}
@@ -56,7 +54,7 @@
 						type="text"
 						bind:value={item.name}
 						onchange={() => (item.name = item.name.trim())}
-						class={['input', item.amount === 0 && 'opacity-50 not-placeholder-shown:line-through']}
+						class={['input', item.amount === 0 && 'opacity-50  not-placeholder-shown:line-through']}
 					/>
 				</div>
 			{/each}
@@ -70,7 +68,10 @@
 	{/if}
 
 	<div class="flex justify-center gap-2">
-		<button class="iconized-button" onclick={() => trans.items.push({ name: '', amount: 0 })}>
+		<button
+			class="flex items-center gap-1 primary"
+			onclick={() => trans.items.push({ name: '', amount: 0 })}
+		>
 			<LucidePlus />
 			Add Item
 		</button>
@@ -88,10 +89,9 @@
 					store.deleteTrans(trans);
 				}, 500);
 			}}
-			class="iconized-button"
+			class="danger square"
 		>
 			<LucideTrash2 />
-			Delete
 		</ConfirmDialog>
 	</div>
 </Dialog>
