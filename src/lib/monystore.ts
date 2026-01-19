@@ -29,6 +29,7 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	getFunds: (project: Project, type?: '-' | '+') => number;
 	canDeleteTrans: (trans: Trans) => boolean;
 	getFundsUsedInTime: (project: Project, hours: number) => number;
+	getWeightedFundsUsed: (project: Project) => number;
 };
 
 function migrations() {
@@ -96,4 +97,25 @@ store.getFundsUsedInTime = (project: Project, hours: number) => {
 	const result = sum(trans);
 	if (result < 0) return -result;
 	return 0;
+};
+store.getWeightedFundsUsed = (project: Project) => {
+	const windows = [
+		{ hours: 24, weight: 0.6 },
+		{ hours: 24 * 7, weight: 0.3 },
+		{ hours: 24 * 30, weight: 0.1 }
+	];
+
+	let weightedRateSum = 0;
+	let weightSum = 0;
+	for (const window of windows) {
+		const fundsUsed = store.getFundsUsedInTime(project, window.hours);
+		if (fundsUsed > 0) {
+			const rate = fundsUsed / (window.hours / 24); // daily rate
+			weightedRateSum += rate * window.weight;
+			weightSum += window.weight;
+		}
+	}
+
+	if (weightSum === 0) return 0;
+	return weightedRateSum / weightSum;
 };
