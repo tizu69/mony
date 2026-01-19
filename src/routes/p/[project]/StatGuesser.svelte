@@ -10,9 +10,10 @@
 	let dailyRate = $derived(store.getWeightedFundsUsed(project));
 	let daysLeft = $derived(available / dailyRate);
 	let spendingData = $derived(store.getSpendingByDay(project, 30));
+	let daysWithSpending = $derived(spendingData.filter((d) => d.amount > 0).length);
 </script>
 
-{#if dailyRate > 0}
+{#if dailyRate > 0 && daysWithSpending > 1}
 	<div class="flex flex-col gap-4 card">
 		<div class="grid grid-cols-2 gap-4 divide-x divide-border">
 			<div>
