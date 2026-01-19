@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Number from '$lib/components/Number.svelte';
-	import SpendingGraph from '$lib/components/SpendingGraph.svelte';
+	import SpendingGraph from './SpendingGraph.svelte';
 	import { store } from '$lib/monystore';
 	import type { Project } from '$lib/types';
 
