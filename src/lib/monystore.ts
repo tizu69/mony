@@ -30,6 +30,7 @@ export const store = persistedState<Store>('mony', defaultStore) as {
 	canDeleteTrans: (trans: Trans) => boolean;
 	getFundsUsedInTime: (project: Project, hours: number) => number;
 	getWeightedFundsUsed: (project: Project) => number;
+	getSpendingByDay: (project: Project, days: number) => { day: Date; amount: number }[];
 };
 
 function migrations() {
@@ -118,4 +119,25 @@ store.getWeightedFundsUsed = (project: Project) => {
 
 	if (weightSum === 0) return 0;
 	return weightedRateSum / weightSum;
+};
+store.getSpendingByDay = (project: Project, days: number) => {
+	const spendingByDay: { day: Date; amount: number }[] = [];
+	const now = new Date();
+
+	const trans = store.getTrans(project).filter((t) => t.amount < 0);
+
+	for (let i = 0; i < days; i++) {
+		const day = new Date(now);
+		day.setDate(now.getDate() - i);
+		day.setHours(0, 0, 0, 0);
+		const endOfDay = new Date(day);
+		endOfDay.setHours(23, 59, 59, 999);
+
+		const dayTrans = trans.filter((t) => t.date >= day.getTime() && t.date <= endOfDay.getTime());
+		const amount = -sum(dayTrans);
+
+		spendingByDay.push({ day, amount });
+	}
+
+	return spendingByDay.reverse(); // from oldest to newest
 };
